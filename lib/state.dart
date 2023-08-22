@@ -1,0 +1,1 @@
+enum DataStateStatus { initial, loading, loadMore, success, error }
