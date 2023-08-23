@@ -1,25 +1,9 @@
 part of 'user_bloc.dart';
 
-class UserState {
-  final DataStateStatus status;
-  final List<UserModel>? users;
-  final String errorMessage;
-
-  UserState({
-    this.status = DataStateStatus.initial,
-    this.users,
-    this.errorMessage = "",
-  });
-
-  UserState copyWith({
-    DataStateStatus? status,
-    List<UserModel>? users,
-    String? errorMessage,
-  }) {
-    return UserState(
-      status: status ?? this.status,
-      users: users ?? this.users,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+@freezed
+class UserState with _$UserState {
+  const factory UserState.initial() = _Initial;
+  const factory UserState.loading() = _Loading;
+  const factory UserState.success({@Default([]) List<UserModel> users}) = _Success;
+  const factory UserState.error({@Default("") String errorMessage}) = _Error;
 }
