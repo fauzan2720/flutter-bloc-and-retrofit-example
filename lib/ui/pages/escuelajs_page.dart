@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter_app/bloc/user_bloc.dart';
-import 'package:starter_app/repository/models/user_model.dart';
+import 'package:starter_app/bloc/product/product_bloc.dart';
+import 'package:starter_app/repository/models/product_model.dart';
 import 'package:starter_app/state.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class EscuelajsPage extends StatelessWidget {
+  const EscuelajsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<UserBloc>().add(GetUserEvent());
+    context.read<ProductBloc>().add(GetProductEvent());
 
     return Scaffold(
-      body: BlocBuilder<UserBloc, UserState>(
+      body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state.status == DataStateStatus.loading) {
             return const Center(
@@ -26,17 +26,17 @@ class MyHomePage extends StatelessWidget {
             return ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) {
-                final UserModel data = state.users![index];
+                final ProductModel data = state.products![index];
 
                 return Card(
                   child: ListTile(
                     onTap: () {},
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(50.0),
-                      child: Image.network(data.avatar),
+                      child: Image.network(data.images[0]),
                     ),
-                    title: Text("${data.firstName} ${data.lastName}"),
-                    subtitle: Text(data.email),
+                    title: Text(data.title),
+                    subtitle: Text(data.description),
                   ),
                 );
               },

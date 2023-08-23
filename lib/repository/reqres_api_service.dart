@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:starter_app/repository/models/response_api.dart';
 
-part 'rest_client.g.dart';
+part 'reqres_api_service.g.dart';
 
 @RestApi(baseUrl: "https://reqres.in/api/")
-abstract class RestClient {
-  factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
+abstract class ReqresApiService {
+  factory ReqresApiService(Dio dio, {String baseUrl}) = _ReqresApiService;
 
   @GET("users")
   Future<ResponseApi> getUsers();

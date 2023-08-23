@@ -3,25 +3,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter_app/repository/models/response_api.dart';
 
 import 'package:starter_app/repository/models/user_model.dart';
-import 'package:starter_app/repository/rest_client.dart';
+import 'package:starter_app/repository/reqres_api_service.dart';
 
-import '../state.dart';
+import '../../state.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final RestClient restClient;
+  final ReqresApiService reqresApiService;
   UserBloc(
-    this.restClient,
+    this.reqresApiService,
   ) : super(UserState()) {
-    on<UserEvent>((event, emit) async {
+    on<GetUserEvent>((event, emit) async {
       emit(state.copyWith(
         status: DataStateStatus.loading,
       ));
 
       try {
-        final ResponseApi responseApi = await restClient.getUsers();
+        final ResponseApi responseApi = await reqresApiService.getUsers();
         final List<UserModel> data = responseApi.data;
         emit(state.copyWith(
           status: DataStateStatus.success,
